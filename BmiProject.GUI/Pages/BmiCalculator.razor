@@ -1,0 +1,67 @@
+﻿@page "/calculator"
+@using BmiProject.GUI.Model;
+@using BmiProject.Model
+@using BmiProject.Calculator
+
+
+<MudRadioGroup @bind-SelectedOption="@_bmiModel.BmiUnitSystem">
+    <MudRadio Option="BmiUnitSystem.Metric" Color="Color.Primary">Metric</MudRadio>
+    <MudRadio Option="BmiUnitSystem.Imperial" Color="Color.Secondary">Imperial</MudRadio>
+</MudRadioGroup>
+
+<EditForm Model="@_bmiModel" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Weight" HelperText="Twoja waga"
+                                  @bind-Value="@_bmiModel.Weight" For="@(() => _bmiModel.Weight)" />
+                    <MudTextField Label="Height" Class="mt-3"
+                                  @bind-Value="_bmiModel.Height" For="@(() => _bmiModel.Height)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Oblicz BMI</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="5">
+            <MudPaper Class="pa-4 mud-height-full">
+                <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
+                @if (success)
+                {
+                    <MudText Color="Color.Success">@_result.Summary</MudText>
+                }
+                else
+                {
+                    <MudText Color="@Color.Error">
+                        <ValidationSummary />
+                    </MudText>
+                }
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12">
+            <MudText Typo="Typo.body2" Align="Align.Center">
+                
+            </MudText>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+@code 
+{
+    private bool success = false;
+    private BmiModel _bmiModel = new ();
+    private BmiResult _result = new ();
+
+    private void OnValidSubmit(EditContext context) {
+
+        var calculate = new BmiCalculatorFacade(_bmiModel.BmiUnitSystem);
+        _result = calculate.CalculateBmiResult(_bmiModel.Weight, _bmiModel.Height);
+        
+        success = true;
+        StateHasChanged();
+    }
+    
+
+}
