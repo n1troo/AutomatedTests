@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BmiProject.Model;
-using MudBlazor;
 
 namespace BmiProject.GUI.Model
 {

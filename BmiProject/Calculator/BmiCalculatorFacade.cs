@@ -6,12 +6,11 @@ namespace BmiProject.Calculator;
 public class BmiCalculatorFacade
 {
     private readonly BmiUnitSystem _unitSystem;
-    private readonly IBmiCalculator _bmiCalculator;
 
     public BmiCalculatorFacade(BmiUnitSystem unitSystem)
     {
         _unitSystem = unitSystem;
-        _bmiCalculator = GetTypeOfCalculator(unitSystem);
+        GetTypeOfCalculator(unitSystem);
     }
 
     private IBmiCalculator GetTypeOfCalculator(BmiUnitSystem unitSystem)
@@ -31,7 +30,7 @@ public class BmiCalculatorFacade
 
         Console.WriteLine(bmi);
         
-        var result = new BmiResult()
+        var result = new BmiResult
         {
             BmiUnitSystem = _unitSystem,
             BmiClassification = new BmiDeterminator().DetermineBmi(bmi),
