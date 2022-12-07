@@ -4,28 +4,28 @@
 @using BmiProject.Calculator
 
 
-<MudRadioGroup @bind-SelectedOption=@_bmiModel.BmiUnitSystem>
-    <MudRadio Option=BmiUnitSystem.Metric Color=Color.Primary>Metric</MudRadio>
-    <MudRadio Option=BmiUnitSystem.Imperial Color=Color.Secondary>Imperial</MudRadio>
+<MudRadioGroup @bind-SelectedOption="@_bmiModel.BmiUnitSystem">
+    <MudRadio Option="BmiUnitSystem.Metric" Color="Color.Primary">Metric</MudRadio>
+    <MudRadio Option="BmiUnitSystem.Imperial" Color="Color.Secondary">Imperial</MudRadio>
 </MudRadioGroup>
 
-<EditForm Model=@_bmiModel OnValidSubmit=OnValidSubmit>
+<EditForm Model="@_bmiModel" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator/>
     <MudGrid>
-        <MudItem xs=12 sm=7>
+        <MudItem xs="12" sm="7">
             <MudCard>
                 <MudCardContent>
-                    <MudTextField Label=Weight HelperText="Twoja waga" @bind-Value=@_bmiModel.Weight For="@(() => _bmiModel.Weight)"/>
-                    <MudTextField Label=Height Class=mt-3 @bind-Value=_bmiModel.Height For="@(() => _bmiModel.Height)"/>
+                    <MudTextField Label="Weight" HelperText="Twoja waga" @bind-Value="@_bmiModel.Weight" For="@(() => _bmiModel.Weight)"/>
+                    <MudTextField Label="Height" Class="mt-3" @bind-Value="_bmiModel.Height" For="@(() => _bmiModel.Height)"/>
                 </MudCardContent>
                 <MudCardActions>
-                    <MudButton ButtonType=ButtonType.Submit Variant=Variant.Filled Color=Color.Primary Class=ml-auto>Oblicz BMI</MudButton>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Oblicz BMI</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>
-        <MudItem xs=12 sm=5>
+        <MudItem xs="12" sm="5">
             <MudPaper Class="pa-4 mud-height-full">
-                <MudText Typo=Typo.subtitle2>Validation Summary</MudText>
+                <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
                 @if (_success) 
                 {
                     <MudText Color="Color.Default">@_result.Summary</MudText>
@@ -39,8 +39,8 @@
                 }
             </MudPaper>
         </MudItem>
-        <MudItem xs=12>
-            <MudText Typo=Typo.body2 Align=Align.Center>
+        <MudItem xs="12">
+            <MudText Typo="Typo.body2" Align="Align.Center">
             </MudText>
         </MudItem>
     </MudGrid>
